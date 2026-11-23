@@ -127,6 +127,12 @@ Solicitud POST a `/tasks`:
 
 El proyecto cuenta con un backend funcional, una base de datos MySQL y dos servicios desplegados mediante Docker Compose. Se han realizado pruebas de creación y consulta de tareas para verificar la comunicación entre los contenedores.
 
+## Integración continua con Jenkins
+
+El proyecto utiliza Jenkins para automatizar la validación del backend.
+El proceso obtiene el código desde GitHub, instala las dependencias
+con npm y verifica la sintaxis de JavaScript antes de finalizar la ejecución.
+
 ## Autor
 
 David Trujillo
