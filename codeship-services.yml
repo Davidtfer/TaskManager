@@ -1,0 +1,4 @@
+backend:
+  build:
+    context: ./backend
+    dockerfile: Dockerfile
