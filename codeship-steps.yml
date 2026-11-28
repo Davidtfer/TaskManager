@@ -1,0 +1,6 @@
+- name: verificar-sintaxis
+  service: backend
+  command: node --check server.js
+- name: listar-dependencias
+  service: backend
+  command: npm ls --depth=0
