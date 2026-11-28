@@ -1,0 +1,35 @@
+pipeline {
+  agent any
+  tools { nodejs 'Node24' }
+  options { disableConcurrentBuilds() }
+  triggers { pollSCM('H/5 * * * *') }
+  stages {
+    stage('Validar estructura') {
+      steps {
+        sh '''
+          git --version
+          test -f README.md
+          test -f backend/server.js
+          test -f backend/package.json
+          test -f docker-compose.yml
+        '''
+      }
+    }
+    stage('Backend') {
+      steps {
+        dir('backend') {
+          sh '''
+            npm ci
+            node --check server.js
+            npm ls --depth=0
+          '''
+        }
+      }
+    }
+    stage('Imagen Docker') {
+      steps {
+        sh 'docker build -t taskmanager-backend:${BUILD_NUMBER} ./backend'
+      }
+    }
+  }
+}
