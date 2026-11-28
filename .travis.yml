@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "24"
+services:
+  - docker
+branches:
+  only:
+    - main
+install:
+  - npm ci --prefix backend
+script:
+  - node --check backend/server.js
+  - npm ls --depth=0 --prefix backend
+  - docker build -t taskmanager-backend:$TRAVIS_BUILD_NUMBER ./backend
